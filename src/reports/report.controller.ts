@@ -1,10 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import reports from 'src/data/data';
+import { ReportService } from './report.service';
 
 @Controller()
 export class ReportController {
+  constructor(private reportService: ReportService) {}
   @Get()
   getReports() {
-    return reports;
+    return this.reportService.getReports();
   }
 }
