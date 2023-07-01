@@ -3,7 +3,11 @@ import reports from 'src/data/data';
 
 @Injectable()
 export class ReportService {
-  getReports() {
-    return reports;
+  getReports(type: string) {
+    return reports.filter((report) => report.type === type);
+  }
+
+  getReportById(id: number) {
+    return reports.find((report) => report.id === id);
   }
 }
