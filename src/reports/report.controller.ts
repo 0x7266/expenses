@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -74,5 +75,10 @@ export class ReportController {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.reportService.updateReport(reportType, body, id);
+  }
+
+  @Delete(':id')
+  deleteReport(@Param('id', ParseUUIDPipe) id: string) {
+    return this.reportService.deleteReport(id);
   }
 }

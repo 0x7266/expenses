@@ -26,6 +26,7 @@ export class ReportService {
     );
     if (!report) {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      return;
     }
     return report;
   }
@@ -34,20 +35,29 @@ export class ReportService {
     const reportToUpdate = reports
       .filter((report) => report.type === type)
       .find((report) => report.id === id);
-
     if (!reportToUpdate) {
       throw new HttpException('Report not found', HttpStatus.NOT_FOUND);
+      return;
     }
-
     const reportIndex = reports.findIndex(
       (report) => report.id === reportToUpdate.id,
     );
-
     return (reports[reportIndex] = {
       ...reports[reportIndex],
       ...body,
       updated_at: new Date(),
     });
+  }
+
+  deleteReport(id: string) {
+    const reportIndex = reports.findIndex((report) => report.id === id);
+    // findIndex returns -1 when the report is not found
+    if (reportIndex === -1) {
+      throw new HttpException('Report not found', HttpStatus.NOT_FOUND);
+      return;
+    }
+    reports.splice(reportIndex, 1);
+    return 'Done';
   }
 }
 
