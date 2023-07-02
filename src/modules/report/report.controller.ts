@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpStatus,
   Param,
   ParseEnumPipe,
@@ -14,6 +15,7 @@ import { ReportService } from './report.service';
 import { ReportType } from 'src/data/data';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { UpdateReportDto } from './dtos/update-report.dto';
+import { ReportResponseDto } from './dtos/report-response.dto';
 
 @Controller(':type')
 export class ReportController {
@@ -29,7 +31,7 @@ export class ReportController {
       }),
     )
     type: string,
-  ) {
+  ): ReportResponseDto {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.reportService.createReport(reportType, { amount, source });
@@ -44,7 +46,7 @@ export class ReportController {
       }),
     )
     type: string,
-  ) {
+  ): ReportResponseDto[] {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.reportService.getReports(reportType);
@@ -60,7 +62,7 @@ export class ReportController {
     )
     type: string,
     @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  ): ReportResponseDto {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.reportService.getReportById(reportType, id);
@@ -71,12 +73,13 @@ export class ReportController {
     @Body() body: UpdateReportDto,
     @Param('type') type: string,
     @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  ): ReportResponseDto {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.reportService.updateReport(reportType, body, id);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   deleteReport(@Param('id', ParseUUIDPipe) id: string) {
     return this.reportService.deleteReport(id);
