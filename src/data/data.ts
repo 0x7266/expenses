@@ -12,7 +12,7 @@ type Report = {
   updated_at: Date;
 };
 
-const reports: Report[] = [
+export const reports: Report[] = [
   {
     id: 1,
     type: ReportType.INCOME,
@@ -78,5 +78,3 @@ const reports: Report[] = [
     updated_at: new Date(),
   },
 ];
-
-export default reports;

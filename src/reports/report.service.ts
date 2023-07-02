@@ -1,14 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import reports from '../data/data';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ReportType, reports } from '../data/data';
 
 @Injectable()
 export class ReportService {
-  getReports(type: string) {
-    if (type === 'reports') return reports;
+  getReports(type: ReportType) {
     return reports.filter((report) => report.type === type);
   }
 
-  getReportById(id: number) {
-    return reports.find((report) => report.id === id);
+  getReportById(type: ReportType, id: number) {
+    const report = reports.find(
+      (report) => report.id === id && report.type === type,
+    );
+    if (!report) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+    return report;
   }
 }
