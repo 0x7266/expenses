@@ -1,10 +1,12 @@
+import { v4 } from 'uuid';
+
 export enum ReportType {
   INCOME = 'income',
   EXPENSE = 'expense',
 }
 
 type Report = {
-  id: number;
+  id: string;
   type: ReportType;
   amount: number;
   source: string;
@@ -14,7 +16,7 @@ type Report = {
 
 export const reports: Report[] = [
   {
-    id: 1,
+    id: v4(),
     type: ReportType.INCOME,
     source: 'Salary',
     amount: 3800,
@@ -22,7 +24,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 2,
+    id: v4(),
     type: ReportType.INCOME,
     source: 'YouTube',
     amount: 770,
@@ -30,7 +32,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 3,
+    id: v4(),
     type: ReportType.EXPENSE,
     source: 'Food',
     amount: 690,
@@ -38,7 +40,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 4,
+    id: v4(),
     type: ReportType.EXPENSE,
     source: 'Internet',
     amount: 50,
@@ -46,7 +48,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 5,
+    id: v4(),
     type: ReportType.INCOME,
     source: 'TikTok',
     amount: 900,
@@ -54,7 +56,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 6,
+    id: v4(),
     type: ReportType.EXPENSE,
     source: 'Medicines',
     amount: 169,
@@ -62,7 +64,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 7,
+    id: v4(),
     type: ReportType.INCOME,
     source: 'Freelancing',
     amount: 550,
@@ -70,7 +72,7 @@ export const reports: Report[] = [
     updated_at: new Date(),
   },
   {
-    id: 8,
+    id: v4(),
     type: ReportType.EXPENSE,
     source: 'Vet',
     amount: 200,

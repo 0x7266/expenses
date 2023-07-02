@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ReportType, reports } from '../data/data';
+import { v4 } from 'uuid';
 
 @Injectable()
 export class ReportService {
-  createReport(type: ReportType, { amount, source }: Report) {
+  createReport(type: ReportType, { amount, source }: CreateReport) {
     const newReport = {
-      id: reports.length + 1,
+      id: v4(),
       type,
       amount,
       source,
@@ -19,7 +20,7 @@ export class ReportService {
     return reports.filter((report) => report.type === type);
   }
 
-  getReportById(type: ReportType, id: number) {
+  getReportById(type: ReportType, id: string) {
     const report = reports.find(
       (report) => report.id === id && report.type === type,
     );
@@ -28,9 +29,34 @@ export class ReportService {
     }
     return report;
   }
+
+  updateReport(type: ReportType, body: UpdateReport, id: string) {
+    const reportToUpdate = reports
+      .filter((report) => report.type === type)
+      .find((report) => report.id === id);
+
+    if (!reportToUpdate) {
+      throw new HttpException('Report not found', HttpStatus.NOT_FOUND);
+    }
+
+    const reportIndex = reports.findIndex(
+      (report) => report.id === reportToUpdate.id,
+    );
+
+    return (reports[reportIndex] = {
+      ...reports[reportIndex],
+      ...body,
+      updated_at: new Date(),
+    });
+  }
 }
 
-interface Report {
+interface CreateReport {
   source: string;
   amount: number;
+}
+
+interface UpdateReport {
+  amount?: number;
+  source?: string;
 }
