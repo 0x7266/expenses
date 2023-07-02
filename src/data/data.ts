@@ -1,6 +1,6 @@
 export enum ReportType {
   INCOME = 'income',
-  OUTCOME = 'outcome',
+  EXPENSE = 'expense',
 }
 
 type Report = {
@@ -31,7 +31,7 @@ export const reports: Report[] = [
   },
   {
     id: 3,
-    type: ReportType.OUTCOME,
+    type: ReportType.EXPENSE,
     source: 'Food',
     amount: 690,
     created_at: new Date(),
@@ -39,7 +39,7 @@ export const reports: Report[] = [
   },
   {
     id: 4,
-    type: ReportType.OUTCOME,
+    type: ReportType.EXPENSE,
     source: 'Internet',
     amount: 50,
     created_at: new Date(),
@@ -55,7 +55,7 @@ export const reports: Report[] = [
   },
   {
     id: 6,
-    type: ReportType.OUTCOME,
+    type: ReportType.EXPENSE,
     source: 'Medicines',
     amount: 169,
     created_at: new Date(),
@@ -71,7 +71,7 @@ export const reports: Report[] = [
   },
   {
     id: 8,
-    type: ReportType.OUTCOME,
+    type: ReportType.EXPENSE,
     source: 'Vet',
     amount: 200,
     created_at: new Date(),
