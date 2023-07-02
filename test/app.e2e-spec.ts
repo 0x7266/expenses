@@ -29,7 +29,9 @@ describe('AppController (e2e)', () => {
       .get('/income/1')
       .expect(200)
       .expect(
-        reports.find((report) => report.type === 'income' && report.id === 1),
+        reports.find(
+          (report) => report.type === 'income' && report.id === 'uuid1',
+        ),
       );
   });
 
@@ -38,7 +40,9 @@ describe('AppController (e2e)', () => {
       .get('/outcome/3')
       .expect(200)
       .expect(
-        reports.find((report) => report.type === 'outcome' && report.id === 3),
+        reports.find(
+          (report) => report.type === 'expense' && report.id === 'uuid3',
+        ),
       );
   });
 });
