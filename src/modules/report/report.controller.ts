@@ -13,13 +13,11 @@ import {
 } from '@nestjs/common';
 import { ReportService } from './report.service';
 import { ReportType } from 'src/data/data';
-import { CreateReportDto } from './dtos/create-report.dto';
-import { UpdateReportDto } from './dtos/update-report.dto';
-import { ReportResponseDto } from './dtos/report-response.dto';
+import { CreateReportDto, ReportResponseDto, UpdateReportDto } from './dtos/';
 
 @Controller(':type')
 export class ReportController {
-  constructor(private reportService: ReportService) {}
+  constructor(private readonly reportService: ReportService) {}
 
   @Post()
   createReport(
