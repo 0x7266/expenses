@@ -3,6 +3,18 @@ import { ReportType, reports } from '../data/data';
 
 @Injectable()
 export class ReportService {
+  createReport(type: ReportType, { amount, source }: Report) {
+    const newReport = {
+      id: reports.length + 1,
+      type,
+      amount,
+      source,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+    reports.push(newReport);
+  }
+
   getReports(type: ReportType) {
     return reports.filter((report) => report.type === type);
   }
@@ -16,4 +28,9 @@ export class ReportService {
     }
     return report;
   }
+}
+
+interface Report {
+  source: string;
+  amount: number;
 }
